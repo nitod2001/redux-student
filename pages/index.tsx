@@ -1,3 +1,10 @@
+import { Container } from "react-bootstrap";
+import MainHome from "../src/containers/MainHome";
+
 export default function Home() {
-  return <></>;
+  return (
+    <Container>
+      <MainHome></MainHome>
+    </Container>
+  );
 }

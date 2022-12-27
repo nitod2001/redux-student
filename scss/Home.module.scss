@@ -1,0 +1,12 @@
+.list {
+  margin-top: 20px !important;
+  .list-item {
+    display: flex;
+    justify-content: space-between;
+  }
+  .list-item-link {
+    text-decoration: none;
+    outline: none;
+    color: #fff !important;
+  }
+}
