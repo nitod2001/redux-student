@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { InputGroup, Form, Button } from "react-bootstrap";
+import { Form, Button } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { addlist } from "../../redux/actions/addlist";
 
@@ -12,7 +12,8 @@ export default function MainForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setStudent();
+    // e.stopPropagation();
+    setStudent("");
     dispatch(addlist(student));
     document.querySelector(".input").value = "";
   };
