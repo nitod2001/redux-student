@@ -1,0 +1,15 @@
+.list {
+  margin-top: 20px !important;
+  .list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .list-btn-list {
+      display: flex;
+      align-items: center;
+    }
+  }
+  .list-link {
+    text-decoration: none;
+  }
+}
