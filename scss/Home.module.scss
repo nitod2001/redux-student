@@ -3,10 +3,13 @@
   .list-item {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    .list-btn-list {
+      display: flex;
+      align-items: center;
+    }
   }
-  .list-item-link {
+  .list-link {
     text-decoration: none;
-    outline: none;
-    color: #fff !important;
   }
 }

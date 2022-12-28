@@ -22,3 +22,26 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+.btn-link {
+  text-decoration: none;
+  outline: none;
+  color: #fff !important;
+}
+
+.btn-link-home {
+  margin-bottom: 10px;
+  margin-left: 10px;
+  text-decoration: none;
+  outline: none;
+  color: #fff !important;
+}
+
+.btn-link-remove {
+  margin-left: 10px;
+  border: none;
+  text-decoration: none;
+  outline: none;
+  color: #fff !important;
+  background-color: red !important;
+}

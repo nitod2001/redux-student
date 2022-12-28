@@ -1,9 +1,9 @@
 import { combineReducers } from "redux";
 
-import AddlistReducer from "./AddlistReducer";
+import StudentReducer from "./StudentReducer";
 
 const allReducers = combineReducers({
-  AddlistReducer,
+  StudentReducer,
 });
 
 export default allReducers;
