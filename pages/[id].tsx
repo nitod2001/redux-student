@@ -6,6 +6,8 @@ import StudentBlock from "../src/components/StudentBlock";
 
 export default function student() {
   const [revealForm, setrevealForm] = useState(false);
+  const [show, setShow] = useState(true);
+  const handleClose = () => setShow(false);
 
   const handleRevealForm = (reveal: any) => {
     setrevealForm(reveal);
@@ -14,7 +16,11 @@ export default function student() {
   return (
     <Container>
       {revealForm ? (
-        <EditForm handleRevealForm={handleRevealForm}></EditForm>
+        <EditForm
+          show={show}
+          handleClose={handleClose}
+          handleRevealForm={handleRevealForm}
+        ></EditForm>
       ) : (
         <StudentBlock handleRevealForm={handleRevealForm}></StudentBlock>
       )}
