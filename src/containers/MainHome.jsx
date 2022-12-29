@@ -8,6 +8,7 @@ import { Button } from "react-bootstrap";
 
 export default function MainHome() {
   const state = useSelector((state) => state.StudentReducer);
+  console.log(state);
   const students = state.students;
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);

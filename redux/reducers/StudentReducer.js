@@ -4,7 +4,7 @@ const student = {
   id: "fcc032b7-9ba4-45ff-8e37-da2c387213e1",
   name: "Nguyen Van A",
   birthday: "",
-  gender: "M/F/Unknown",
+  // gender: "M/F/Unknown",
 };
 
 const student2 = {
@@ -17,7 +17,8 @@ const studentReducerState = {
 };
 
 const StudentReducer = (state = studentReducerState, action) => {
-  console.log(action);
+  console.log(state);
+  console.log(action.payload);
   switch (action.type) {
     case constants.ADD_STUDENT:
       state.students.push(action.payload);
@@ -25,7 +26,9 @@ const StudentReducer = (state = studentReducerState, action) => {
         ...state,
       };
     case constants.REMOVE_STUDENT:
+      console.log(action.payload);
       state.students.splice(action.payload, 1);
+
       return {
         ...state,
       };

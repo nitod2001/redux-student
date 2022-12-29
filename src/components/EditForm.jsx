@@ -1,21 +1,24 @@
 import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { useRouter } from "next/router";
 import { update } from "../../redux/actions/update";
 import Modal from "react-bootstrap/Modal";
 
 export default function EditForm(props) {
   const state = useSelector((state) => state.StudentReducer);
-  const router = useRouter();
-  const position = router.query.id;
   const dispatch = useDispatch();
-  const [student, Setstudent] = useState(state.students[position]);
-  // props.handleRevealForm(revealForm);
+  const student = state.students[props.flag];
+  const id = state.students[props.flag].id;
+  const [name, setName] = useState(state.students[props.flag].name);
+  const [birthday, setBirthday] = useState(state.students[props.flag].birthday);
 
+  student.id = id;
+  student.name = name;
+  student.birthday = birthday;
+  console.log(student);
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(update({ id: position, student }));
+    dispatch(update({ id: props.flag, student }));
     props.handleRevealForm(false);
   };
   return (
@@ -23,7 +26,10 @@ export default function EditForm(props) {
       <Modal
         className="main-modal"
         show={props.show}
-        onHide={props.handleClose}
+        onHide={() => {
+          props.handleRevealForm(false);
+          props.handleClose;
+        }}
       >
         <Modal.Header closeButton>
           <Modal.Title>Update Student</Modal.Title>
@@ -36,15 +42,25 @@ export default function EditForm(props) {
             className="form"
           >
             <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Label>Update Student</Form.Label>
+              <Form.Label>Update Name</Form.Label>
               <Form.Control
                 className="input"
                 required
-                onChange={(e) => {
-                  Setstudent(e.target.value);
-                }}
+                onChange={(e) => setName(e.target.value)}
                 placeholder="Enter student"
-                value={student}
+                value={name}
+              />
+            </Form.Group>
+
+            <Form.Group className="mb-3" controlId="formBasicEmail">
+              <Form.Label>Update Birthday</Form.Label>
+              <Form.Control
+                type="number"
+                className="input"
+                required
+                onChange={(e) => setBirthday(e.target.value)}
+                placeholder="Enter student"
+                value={birthday}
               />
             </Form.Group>
 

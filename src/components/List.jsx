@@ -13,11 +13,17 @@ export default function List(props) {
       {props.students.map((student, index) => {
         // console.log(student, index);
         return (
-          <Link key={index} className="list-link" href={`/${index}`}>
+          <Link
+            key={index}
+            className="list-link"
+            href={`/student/${student.id}`}
+          >
             <ListGroup.Item className="list-item">
-              {student}
+              Name : {student.name}
+              <br />
+              Birthday: {student.birthday}
               <div className="list-btn-list">
-                <Link className="btn-link" href={`/${index}`}>
+                <Link className="btn-link" href={`/student/${student.id}`}>
                   <Button>Detail</Button>
                 </Link>
                 <Link className="btn-link" href="/">

@@ -6,15 +6,28 @@ import { useRouter } from "next/router";
 import { remove } from "../../redux/actions/remove";
 
 export default function StudentBlock(props) {
-  const [revealForm, setrevealForm] = useState(false);
+  let flag = 0;
   const state = useSelector((state) => state.StudentReducer);
   const router = useRouter();
   const position = router.query.id;
   const dispatch = useDispatch();
-  props.handleRevealForm(revealForm);
+  const student = state.students.find((student, index) => {
+    if (position === student.id) {
+      flag = index;
+      return student;
+    }
+  });
+  props.handleFlag(flag);
   return (
     <>
-      <h1>{state.students[position]}</h1>
+      {student ? (
+        <>
+          <h1>Name : {student.name}</h1>
+          <h2>Birthday: {student.birthday}</h2>
+        </>
+      ) : (
+        ""
+      )}
       <Link className="btn-link" href="/">
         <Button className="btn-link-home">Home</Button>
       </Link>
@@ -22,7 +35,7 @@ export default function StudentBlock(props) {
 
       <Button
         onClick={() => {
-          setrevealForm(true);
+          props.handleRevealForm(true);
         }}
         className="btn-link-home"
       >
@@ -33,7 +46,7 @@ export default function StudentBlock(props) {
       <Link className="btn-link" href="/">
         <Button
           onClick={() => {
-            dispatch(remove(position));
+            dispatch(remove(flag));
           }}
           className="btn-link-remove"
         >
