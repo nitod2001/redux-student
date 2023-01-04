@@ -1,24 +1,40 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Form, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { update } from "../../redux/actions/update";
 import Modal from "react-bootstrap/Modal";
+import CallApi from "../../pages/api/ApiCaller";
 
 export default function EditForm(props) {
   const state = useSelector((state) => state.StudentReducer);
+  // const student = state.students[props.flag];
   const dispatch = useDispatch();
-  const student = state.students[props.flag];
-  const id = state.students[props.flag].id;
-  const [name, setName] = useState(state.students[props.flag].name);
-  const [birthday, setBirthday] = useState(state.students[props.flag].birthday);
+  const [students, Setstudents] = useState([]);
+  var student = {};
+  useEffect(() => {
+    CallApi("students", "GET", null).then((res) => {
+      Setstudents(res.data);
+    });
+  }, []);
+  const [name, setName] = useState(student.name);
+  const [birthday, setBirthday] = useState(student.birthday);
 
-  student.id = id;
-  student.name = name;
-  student.birthday = birthday;
+  console.log(students);
+  if (students.length > 0) {
+    student = students[props.flag];
+  }
   console.log(student);
+  // const [name, setName] = useState(state.students[props.flag].name);
+  // const [birthday, setBirthday] = useState(state.students[props.flag].birthday);
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(update({ id: props.flag, student }));
+    // dispatch(update({ id: props.flag, student }));
+    CallApi(`students/${student.id}`, "PUT", {
+      id: student.id,
+      name: name,
+      birthday: birthday,
+    });
     props.handleRevealForm(false);
   };
   return (
@@ -46,26 +62,32 @@ export default function EditForm(props) {
               <Form.Control
                 className="input"
                 required
-                onChange={(e) => setName(e.target.value)}
+                onChange={(e) => {
+                  setName(e.target.value);
+                  student.name = e.target.value;
+                }}
                 placeholder="Enter student"
-                value={name}
+                value={student.name}
               />
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Label>Update Birthday</Form.Label>
               <Form.Control
-                type="number"
+                type="date"
                 className="input"
                 required
-                onChange={(e) => setBirthday(e.target.value)}
+                onChange={(e) => {
+                  setBirthday(e.target.value);
+                  student.birthday = e.target.value;
+                }}
                 placeholder="Enter student"
-                value={birthday}
+                value={student.birthday}
               />
             </Form.Group>
 
             <Button variant="primary" type="submit">
-              Edit
+              Update
             </Button>
           </form>
         </Modal.Body>

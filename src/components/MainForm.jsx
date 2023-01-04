@@ -4,33 +4,49 @@ import { useDispatch } from "react-redux";
 import { addlist } from "../../redux/actions/addlist";
 import Modal from "react-bootstrap/Modal";
 import { v4 as uuidv4 } from "uuid";
+import CallApi from "../../pages/api/ApiCaller";
 
 export default function MainForm(props) {
-  const student = { id: "", name: "", birthday: "" };
-  const [name, setName] = useState("");
-  console.log(student);
-  const [birthday, setBirthday] = useState(0);
+  const [student, setStudent] = useState({
+    id: uuidv4(),
+    name: "",
+    birthday: "",
+  });
   const dispatch = useDispatch();
 
   const handleChangeName = (e) => {
-    setName(e.target.value);
+    student.name = e.target.value;
   };
 
   const handleChangBirthday = (e) => {
-    setBirthday(e.target.value);
+    student.birthday = e.target.value;
   };
-  student.id = uuidv4();
-  student.name = name;
-  student.birthday = birthday;
+
+  // const handleSubmit = (e) => {
+  //   console.log(student);
+  //   e.preventDefault();
+  //   // e.stopPropagation();
+  //   setStudent({});
+  //   dispatch(addlist(student));
+  //   document.querySelector(".input").value = "";
+  //   props.handleClose();
+  // };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // e.stopPropagation();
-    setName("");
-    setBirthday("");
-    dispatch(addlist(student));
+    CallApi("students", "POST", {
+      id: student.id,
+      name: student.name,
+      birthday: student.birthday,
+    }).then((res) =>
+      CallApi("students", "GET", null).then((res) => {
+        props.handleGetstudent(res.data);
+        props.handleAlertClose();
+      })
+    );
     document.querySelector(".input").value = "";
     props.handleClose();
+    props.handleAlert();
   };
   return (
     <>
@@ -57,10 +73,11 @@ export default function MainForm(props) {
                 placeholder="Enter student"
               />
             </Form.Group>
+
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Label>Birthday</Form.Label>
               <Form.Control
-                type="number"
+                type="date"
                 className="input"
                 required
                 onChange={(e) => handleChangBirthday(e)}
