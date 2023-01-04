@@ -18,12 +18,11 @@ export default function EditForm(props) {
   }, []);
   const [name, setName] = useState(student.name);
   const [birthday, setBirthday] = useState(student.birthday);
+  const [point, setPoint] = useState(student.point);
 
-  console.log(students);
   if (students.length > 0) {
     student = students[props.flag];
   }
-  console.log(student);
   // const [name, setName] = useState(state.students[props.flag].name);
   // const [birthday, setBirthday] = useState(state.students[props.flag].birthday);
 
@@ -34,6 +33,7 @@ export default function EditForm(props) {
       id: student.id,
       name: name,
       birthday: birthday,
+      point: point,
     });
     props.handleRevealForm(false);
   };
@@ -44,7 +44,7 @@ export default function EditForm(props) {
         show={props.show}
         onHide={() => {
           props.handleRevealForm(false);
-          props.handleClose;
+          props.handleClose();
         }}
       >
         <Modal.Header closeButton>
@@ -83,6 +83,23 @@ export default function EditForm(props) {
                 }}
                 placeholder="Enter student"
                 value={student.birthday}
+              />
+            </Form.Group>
+
+            <Form.Group className="mb-3" controlId="formBasicEmail">
+              <Form.Label>Update Point</Form.Label>
+              <Form.Control
+                min="0"
+                max="10"
+                type="number"
+                className="input"
+                required
+                onChange={(e) => {
+                  setPoint(e.target.value);
+                  student.point = e.target.value;
+                }}
+                placeholder="Enter student"
+                value={student.point}
               />
             </Form.Group>
 

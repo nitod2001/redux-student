@@ -22,6 +22,10 @@ export default function MainForm(props) {
     student.birthday = e.target.value;
   };
 
+  const handleChangePoint = (e) => {
+    student.point = e.target.value;
+  };
+
   // const handleSubmit = (e) => {
   //   console.log(student);
   //   e.preventDefault();
@@ -38,15 +42,15 @@ export default function MainForm(props) {
       id: student.id,
       name: student.name,
       birthday: student.birthday,
+      point: student.point,
     }).then((res) =>
       CallApi("students", "GET", null).then((res) => {
         props.handleGetstudent(res.data);
-        props.handleAlertClose();
+        alert("Success");
       })
     );
     document.querySelector(".input").value = "";
     props.handleClose();
-    props.handleAlert();
   };
   return (
     <>
@@ -81,6 +85,19 @@ export default function MainForm(props) {
                 className="input"
                 required
                 onChange={(e) => handleChangBirthday(e)}
+                placeholder="Enter student"
+              />
+            </Form.Group>
+
+            <Form.Group className="mb-3" controlId="formBasicEmail">
+              <Form.Label>Point</Form.Label>
+              <Form.Control
+                min="0"
+                max="10"
+                type="number"
+                className="input"
+                required
+                onChange={(e) => handleChangePoint(e)}
                 placeholder="Enter student"
               />
             </Form.Group>

@@ -3,7 +3,7 @@
   .list-item {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-end;
     transform: translateX(0px);
 
     .list-btn-list {
@@ -27,7 +27,7 @@
 
 .student-block {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
   h2 > span {
     font-size: 20px;
