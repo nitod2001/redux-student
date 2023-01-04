@@ -39,6 +39,7 @@ export default function StudentBlock(props) {
           <h2>
             Birthday <span>(YY/MM/DD)</span> : {student.birthday}{" "}
           </h2>
+          <h2>Point : {student.point}</h2>
         </div>
       ) : (
         ""

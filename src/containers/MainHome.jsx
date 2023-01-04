@@ -14,7 +14,7 @@ export default function MainHome() {
   // const [state, setState] = useState();
   // const dispatch = useDispatch();
   const [show, setShow] = useState(false);
-  const [a, setAlert] = useState(false);
+  // const [a, setAlert] = useState(false);
   const [students, Setstudents] = useState([]);
   useEffect(() => {
     CallApi("students", "GET", null).then((res) => {
@@ -23,13 +23,14 @@ export default function MainHome() {
   }, []);
 
   const handleClose = () => setShow(false);
-  const handleAlert = () => setAlert(true);
-  const handleAlertClose = () => setAlert(false);
+  // const handleAlert = () => setAlert(true);
+  // const handleAlertClose = () => setAlert(false);
 
   const handleGetstudent = (arr) => Setstudents(arr);
   return (
     <>
-      {a ? alert("Successful") : ""}
+      <h1 className="heading">Student Manage Application</h1>
+      {/* {a ? alert("Successful") : ""} */}
       <Button
         className="btn-link-home"
         onClick={() => (!show ? setShow(true) : setShow(false))}
@@ -38,8 +39,8 @@ export default function MainHome() {
       </Button>
       {show ? (
         <MainForm
-          handleAlertClose={handleAlertClose}
-          handleAlert={handleAlert}
+          // handleAlertClose={handleAlertClose}
+          // handleAlert={handleAlert}
           handleGetstudent={handleGetstudent}
           handleClose={handleClose}
           show={show}
@@ -49,8 +50,8 @@ export default function MainHome() {
       )}
 
       <List
-        handleAlertClose={handleAlertClose}
-        handleAlert={handleAlert}
+        // handleAlertClose={handleAlertClose}
+        // handleAlert={handleAlert}
         handleGetstudent={handleGetstudent}
         handleClose={handleClose}
         students={students}

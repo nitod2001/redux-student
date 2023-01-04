@@ -19,11 +19,13 @@ export default function List(props) {
     CallApi(`students/${index}`, "DELETE", null).then((res) =>
       CallApi("students", "GET", null).then((res) => {
         props.handleGetstudent(res.data);
-        props.handleAlertClose();
+        // props.handleAlert();
+        alert("Success");
+        // props.handleAlertClose();
       })
     );
-    props.handleClose();
-    props.handleAlert();
+    // props.handleClose();
+    // props.handleAlert();
   };
   var flag = 0;
 
@@ -32,8 +34,8 @@ export default function List(props) {
       <InputGroup className="mb-3">
         <Form.Control
           onChange={(e) => handleSearch(e)}
-          placeholder="Search student"
-          aria-label="Search student"
+          placeholder="Search student's name"
+          aria-label="Search student's name"
           aria-describedby="basic-addon2"
         />
       </InputGroup>
@@ -53,6 +55,8 @@ export default function List(props) {
                     Name : {student.name}
                     <br />
                     Birthday: {student.birthday}
+                    <br />
+                    Point : {student.point}
                     <div className="list-btn-list">
                       <Link
                         className="btn-link"
@@ -96,6 +100,8 @@ export default function List(props) {
                       Name : {student.name}
                       <br />
                       Birthday: {student.birthday}
+                      <br />
+                      Point : {student.point}
                       <div className="list-btn-list">
                         <Link
                           className="btn-link"
