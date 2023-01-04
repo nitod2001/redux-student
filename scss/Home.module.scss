@@ -4,6 +4,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    transform: translateX(0px);
+
     .list-btn-list {
       display: flex;
       align-items: center;
@@ -11,5 +13,23 @@
   }
   .list-link {
     text-decoration: none;
+    position: relative;
+    :hover {
+      color: rgb(116, 138, 238);
+      transform: translateX(5px);
+    }
+  }
+}
+
+.main-modal {
+  color: #000 !important;
+}
+
+.student-block {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  h2 > span {
+    font-size: 20px;
   }
 }

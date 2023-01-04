@@ -1,6 +1,8 @@
-export const remove = (position) => {
+import * as constants from "../constants";
+
+export const remove = (index) => {
   return {
-    type: "REMOVE",
-    payload: position,
+    type: constants.REMOVE_STUDENT,
+    payload: index,
   };
 };

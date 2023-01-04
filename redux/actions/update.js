@@ -1,6 +1,8 @@
+import * as constants from "../constants";
+
 export const update = ({ id, student }) => {
   return {
-    type: "UPDATE",
+    type: constants.UPDATE_STUDENT,
     payload: { id, student },
   };
 };
