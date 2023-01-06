@@ -21,6 +21,11 @@ body {
   color: rgb(116, 138, 238);
 }
 
+.search-input-block {
+  display: flex;
+  gap: 30px;
+}
+
 .notfound-container {
   text-align: center;
   position: absolute;
