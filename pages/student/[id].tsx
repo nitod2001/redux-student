@@ -8,6 +8,7 @@ export default function student() {
   const [revealForm, setrevealForm] = useState(false);
   const [show, setShow] = useState(true);
   const handleClose = () => setShow(false);
+  const handleOpen = () => setShow(true);
 
   const handleRevealForm = (reveal: any) => {
     setrevealForm(reveal);
@@ -16,6 +17,8 @@ export default function student() {
   const handleFlag = (flag: any) => {
     setFlag(flag);
   };
+  // console.log(revealForm);
+  // console.log(show);
 
   return (
     <Container>
@@ -28,6 +31,7 @@ export default function student() {
         ></EditForm>
       ) : (
         <StudentBlock
+          handleOpen={handleOpen}
           handleFlag={handleFlag}
           handleRevealForm={handleRevealForm}
         ></StudentBlock>

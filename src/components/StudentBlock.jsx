@@ -52,6 +52,7 @@ export default function StudentBlock(props) {
       <Button
         onClick={() => {
           props.handleRevealForm(true);
+          props.handleOpen();
         }}
         className="btn-link-home"
       >

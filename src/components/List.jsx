@@ -5,15 +5,20 @@ import { InputGroup, Form, Button, ListGroup } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { remove } from "../../redux/actions/remove";
 import CallApi from "../../pages/api/ApiCaller";
+import jsPDF from "jspdf";
 
 export default function List(props) {
   const dispatch = useDispatch();
-  const [search, setSearch] = useState("");
+  const [searchName, setSearchName] = useState("");
+  const [searchPoint, setSearchPoint] = useState("");
 
-  const handleSearch = (e) => {
-    setSearch(e.target.value.toUpperCase());
+  const handleSearchName = (e) => {
+    setSearchName(e.target.value.toUpperCase());
   };
 
+  const handleSearchPoint = (e) => {
+    setSearchPoint(e.target.value);
+  };
   const handleRemove = (index) => {
     console.log(index);
     CallApi(`students/${index}`, "DELETE", null).then((res) =>
@@ -28,21 +33,52 @@ export default function List(props) {
     // props.handleAlert();
   };
   var flag = 0;
+  //Array 1=>100
+  const pointSort = [...props.students].sort((a, b) => a.point - b.point);
+  //Array Alphabet
+  // const nameSort = [...props.students].sort((a, b) =>
+  //   a.name > b.name ? 1 : -1
+  // );
+  // console.log(nameSort);
+
+  // function printDocument() {
+  //   var doc = new jsPDF();
+  //   doc.html(document.getElementById("divToPrint"), {
+  //     async function(doc) {
+  //       doc.save("mypdf.pdf");
+  //     },
+  //   });
+  // }
 
   return props.students.length > 0 ? (
     <>
-      <InputGroup className="mb-3">
-        <Form.Control
-          onChange={(e) => handleSearch(e)}
-          placeholder="Search student's name"
-          aria-label="Search student's name"
-          aria-describedby="basic-addon2"
-        />
-      </InputGroup>
-      {search === "" ? (
+      <div className="search-input-block">
+        <InputGroup className="mb-3">
+          <Form.Control
+            onChange={(e) => handleSearchName(e)}
+            placeholder="Search student's name"
+            aria-label="Search student's name"
+            aria-describedby="basic-addon2"
+          />
+        </InputGroup>
+        <InputGroup className="mb-3">
+          <Form.Control
+            min="0.0"
+            max="10.0"
+            type="number"
+            step="0.1"
+            onChange={(e) => handleSearchPoint(e)}
+            placeholder="Search student's point "
+            aria-label="Search student's point"
+            aria-describedby="basic-addon2"
+          />
+        </InputGroup>
+      </div>
+      {/* <Button onClick={printDocument}>Print</Button> */}
+      {searchName === "" && searchPoint === "" ? (
         <>
-          <ListGroup className="list">
-            {props.students.map((student, index) => {
+          <ListGroup id="divToPrint" className="list">
+            {pointSort.map((student, index) => {
               // console.log(student, index);
               flag += 1;
               return (
@@ -85,10 +121,11 @@ export default function List(props) {
       ) : (
         <>
           <ListGroup className="list">
-            {props.students.map((student, index) => {
-              // console.log(student, index);
-              // console.log(search);
-              if (student.name.toUpperCase().includes(search)) {
+            {pointSort.map((student, index) => {
+              if (
+                student.name.toUpperCase().includes(searchName) &&
+                student.point.includes(searchPoint)
+              ) {
                 flag += 1;
                 return (
                   <Link

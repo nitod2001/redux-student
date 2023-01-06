@@ -92,6 +92,7 @@ export default function EditForm(props) {
                 min="0"
                 max="10"
                 type="number"
+                step="0.1"
                 className="input"
                 required
                 onChange={(e) => {
