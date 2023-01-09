@@ -165,7 +165,7 @@ export default function List(props) {
             })}
           </ListGroup>
           {flag === 0 ? (
-            <h2>Can't Find</h2>
+            <h2>Can not Find</h2>
           ) : (
             <h2>{`${flag}/${props.students.length}`}</h2>
           )}
