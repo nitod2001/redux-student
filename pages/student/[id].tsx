@@ -4,7 +4,7 @@ import { Button, Container } from "react-bootstrap";
 import EditForm from "../../src/components/EditForm";
 import StudentBlock from "../../src/components/StudentBlock";
 
-export default function student() {
+export default function Student() {
   const [revealForm, setrevealForm] = useState(false);
   const [show, setShow] = useState(true);
   const handleClose = () => setShow(false);
