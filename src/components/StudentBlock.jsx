@@ -21,8 +21,7 @@ export default function StudentBlock(props) {
   const handleRemove = (index) => {
     console.log(index);
     CallApi(`students/${index}`, "DELETE", null).then((res) => {
-      alert("successful");
-      console.log(res);
+      CallApi("students", "GET", null).then((res) => Setstudents(res.data));
     });
   };
   const student = students.find((student, index) => {
