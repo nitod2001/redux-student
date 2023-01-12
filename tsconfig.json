@@ -21,6 +21,6 @@
     "**/*.tsx",
     "src/redux/actions/addList.jsx",
     "src/containers/MainHome.jsx"
-  ],
+, "pages/student/[id].jsx"  ],
   "exclude": ["node_modules"]
 }

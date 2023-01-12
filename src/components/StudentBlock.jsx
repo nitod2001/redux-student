@@ -20,9 +20,10 @@ export default function StudentBlock(props) {
   const dispatch = useDispatch();
   const handleRemove = (index) => {
     console.log(index);
-    CallApi(`students/${index}`, "DELETE", null).then((res) =>
-      console.log(res)
-    );
+    CallApi(`students/${index}`, "DELETE", null).then((res) => {
+      alert("successful");
+      console.log(res);
+    });
   };
   const student = students.find((student, index) => {
     if (position === student.id) {
