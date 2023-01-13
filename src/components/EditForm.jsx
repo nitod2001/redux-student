@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Form, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { update } from "../../redux/actions/update";
+import { update, addlist } from "../../redux/actions/update";
 import Modal from "react-bootstrap/Modal";
 import CallApi from "../../pages/api/ApiCaller";
 
@@ -36,6 +36,7 @@ export default function EditForm(props) {
       point: point,
     });
     props.handleRevealForm(false);
+    CallApi("students", "GET", null).then((res) => dispatch(addlist(res.data)));
   };
   return (
     <>

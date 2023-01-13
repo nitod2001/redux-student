@@ -3,7 +3,7 @@ import React, { useState } from "react";
 
 import { InputGroup, Form, Button, ListGroup } from "react-bootstrap";
 import { useDispatch } from "react-redux";
-import { remove } from "../../redux/actions/remove";
+import { remove, addlist } from "../../redux/actions/remove";
 import CallApi from "../../pages/api/ApiCaller";
 import jsPDF from "jspdf";
 
@@ -24,6 +24,7 @@ export default function List(props) {
     CallApi(`students/${index}`, "DELETE", null).then((res) =>
       CallApi("students", "GET", null).then((res) => {
         props.handleGetstudent(res.data);
+        dispatch(addlist(res.data));
         // props.handleAlert();
         alert("Success");
         // props.handleAlertClose();

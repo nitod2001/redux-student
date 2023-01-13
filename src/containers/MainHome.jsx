@@ -9,16 +9,19 @@ import CallApi from "../../pages/api/ApiCaller";
 import { addlist } from "../../redux/actions/addlist";
 
 export default function MainHome() {
-  // const state = useSelector((state) => state.StudentReducer);
   // const students = state.students;
   // const [state, setState] = useState();
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const [show, setShow] = useState(false);
   // const [a, setAlert] = useState(false);
-  const [students, Setstudents] = useState([]);
+
+  const state = useSelector((state) => state.StudentReducer);
+  console.log(state.students);
+  const [students, Setstudents] = useState(state.students);
   useEffect(() => {
     CallApi("students", "GET", null).then((res) => {
       Setstudents(res.data);
+      dispatch(addlist(res.data));
     });
   }, []);
 

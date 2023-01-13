@@ -3,13 +3,14 @@ import { useDispatch, useSelector } from "react-redux";
 import Link from "next/link";
 import { Button, Container } from "react-bootstrap";
 import { useRouter } from "next/router";
-import { remove } from "../../redux/actions/remove";
+import { remove, addlist } from "../../redux/actions/remove";
 import CallApi from "../../pages/api/ApiCaller";
 
 export default function StudentBlock(props) {
   let flag = 0;
   // const state = useSelector((state) => state.StudentReducer);
   // console.log(state);
+  const dispatch = useDispatch();
   const [students, Setstudents] = useState([]);
   useEffect(() => {
     CallApi("students", "GET", null).then((res) => Setstudents(res.data));
@@ -21,7 +22,9 @@ export default function StudentBlock(props) {
   const handleRemove = (index) => {
     console.log(index);
     CallApi(`students/${index}`, "DELETE", null).then((res) => {
-      CallApi("students", "GET", null).then((res) => Setstudents(res.data));
+      CallApi("students", "GET", null).then((res) =>
+        dispatch(addlist(res.data))
+      );
     });
   };
   const student = students.find((student, index) => {
