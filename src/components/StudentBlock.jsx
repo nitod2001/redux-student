@@ -10,7 +10,6 @@ export default function StudentBlock(props) {
   let flag = 0;
   // const state = useSelector((state) => state.StudentReducer);
   // console.log(state);
-  const dispatch = useDispatch();
   const [students, Setstudents] = useState([]);
   useEffect(() => {
     CallApi("students", "GET", null).then((res) => Setstudents(res.data));
